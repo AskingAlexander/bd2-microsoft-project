@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace bd2_msft_project.Utils
+﻿namespace bd2_msft_project.Utils
 {
     public static class Settings
     {
@@ -13,5 +11,8 @@ namespace bd2_msft_project.Utils
 
         public const string LoginOrRegisterProcedure = "usp_LoginOrRegister";
         public const string GetUserByIDProcedure = "usp_GetUserByID";
+        public const string GetAllProducts = "usp_GetAllProducts";
+        public const string AddOrEditProductProcedure = "usp_AddOrEditProduct";
+        public const string DeleteProductProcedure = "usp_DeleteProduct";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using bd2_msft_project.Models.DBModels;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -72,6 +73,47 @@ namespace bd2_msft_project.Utils.DB
                 Email = userData["Email"] != DBNull.Value ? (string)userData["Email"] : string.Empty,
                 BirthDay = userData["BirthDay"] != DBNull.Value ? (DateTime)userData["BirthDay"] : DateTime.UtcNow
             };
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            List<Product> allProducts = new List<Product>();
+            using DataTable productTable = new DataTable();
+            using SqlCommand getAllProducts = new SqlCommand
+            {
+                CommandText = Settings.GetUserByIDProcedure,
+                CommandType = CommandType.StoredProcedure,
+                Connection = new SqlConnection(Settings.DBConnectionString)
+            };
+            if (getAllProducts.Connection.State != ConnectionState.Open)
+            {
+                getAllProducts.Connection.Open();
+            }
+
+            using SqlDataAdapter productGrabber = new SqlDataAdapter(getAllProducts);
+            try
+            {
+                productGrabber.Fill(productTable);
+
+                foreach (DataRow currentProduct in productTable.Rows)
+                {
+                    allProducts.Add(new Product
+                    {
+                        ID = currentProduct["ID"] != DBNull.Value ? (int)currentProduct["ID"] : 0,
+                        DateAdded = currentProduct["DateAdded"] != DBNull.Value ? (DateTime)currentProduct["DateAdded"] : DateTime.UtcNow,
+                        ProductDescription = currentProduct["ProductDescription"] != DBNull.Value ? (string)currentProduct["ProductDescription"] : string.Empty,
+                        ProductName = currentProduct["ProductName"] != DBNull.Value ? (string)currentProduct["FirstName"] : string.Empty,
+                        RemainingStock = currentProduct["RemainingStock"] != DBNull.Value ? (int)currentProduct["RemainingStock"] : 0,
+                        UnitPrice = currentProduct["UnitPrice"] != DBNull.Value ? (int)currentProduct["UnitPrice"] : 0
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return allProducts;
+            }
+
+            return allProducts;
         }
     }
 }
