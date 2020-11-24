@@ -9,6 +9,6 @@ namespace bd2_msft_project.Models.DBModels
         public string ProductDescription { get; set; }
         public DateTime DateAdded { get; set; }
         public int RemainingStock { get; set; }
-        public int UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

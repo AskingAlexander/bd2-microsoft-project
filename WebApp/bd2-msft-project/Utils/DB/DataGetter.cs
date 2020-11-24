@@ -81,7 +81,7 @@ namespace bd2_msft_project.Utils.DB
             using DataTable productTable = new DataTable();
             using SqlCommand getAllProducts = new SqlCommand
             {
-                CommandText = Settings.GetUserByIDProcedure,
+                CommandText = Settings.GetAllProducts,
                 CommandType = CommandType.StoredProcedure,
                 Connection = new SqlConnection(Settings.DBConnectionString)
             };
@@ -102,9 +102,9 @@ namespace bd2_msft_project.Utils.DB
                         ID = currentProduct["ID"] != DBNull.Value ? (int)currentProduct["ID"] : 0,
                         DateAdded = currentProduct["DateAdded"] != DBNull.Value ? (DateTime)currentProduct["DateAdded"] : DateTime.UtcNow,
                         ProductDescription = currentProduct["ProductDescription"] != DBNull.Value ? (string)currentProduct["ProductDescription"] : string.Empty,
-                        ProductName = currentProduct["ProductName"] != DBNull.Value ? (string)currentProduct["FirstName"] : string.Empty,
+                        ProductName = currentProduct["ProductName"] != DBNull.Value ? (string)currentProduct["ProductName"] : string.Empty,
                         RemainingStock = currentProduct["RemainingStock"] != DBNull.Value ? (int)currentProduct["RemainingStock"] : 0,
-                        UnitPrice = currentProduct["UnitPrice"] != DBNull.Value ? (int)currentProduct["UnitPrice"] : 0
+                        UnitPrice = currentProduct["UnitPrice"] != DBNull.Value ? (decimal)currentProduct["UnitPrice"] : 0
                     });
                 }
             }
