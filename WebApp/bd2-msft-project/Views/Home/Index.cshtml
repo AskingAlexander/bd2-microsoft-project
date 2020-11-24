@@ -1,8 +1,43 @@
-﻿@{
+﻿@model bd2_msft_project.Models.DBModels.UserLogin
+@{
     ViewData["Title"] = "Home Page";
+    bool isLoggedIN = (bool)ViewData["IsLoggedIn"];
+    bool badLogin = (bool)ViewData["BadLogin"];
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (badLogin)
+{
+    <script>alert("Invalid Login Credentials!");</script>
+}
+
+@if (!isLoggedIN)
+{
+    <div id="loginBox">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <div class="editor-label">
+                @Html.LabelFor(m => m.UserName):
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <br />
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Password):
+            </div>
+            <div class="password">
+                @Html.TextBoxFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <p>
+                <input type="submit" />
+            </p>
+        }
+    </div>
+}

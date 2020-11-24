@@ -20,7 +20,8 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BD2ProjectDBCS": "Server=tcp:askingalexander-demo-sql.database.windows.net,1433;Initial Catalog=bd2-msft-project;Persist Security Info=False;User ID=adminLogin;Password=adminPassWord!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
       }
     }
   }
