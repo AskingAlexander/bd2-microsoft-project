@@ -103,7 +103,7 @@ namespace bd2_msft_project.Controllers
                 await LoadProducts();
 
                 product.DateAdded = DateTime.UtcNow.Date;
-                product.ID = allProducts.Count;
+                product.ID = allProducts.Count + 1;
 
                 await AddOrEditProductAsync(product);
 
@@ -120,8 +120,7 @@ namespace bd2_msft_project.Controllers
                 return NotFound();
             }
 
-            await Task.Delay(0);
-
+            await LoadProducts();
             var product = allProducts.FirstOrDefault(x => x.ID == id);
             if (product == null)
             {
@@ -173,7 +172,7 @@ namespace bd2_msft_project.Controllers
                 return NotFound();
             }
 
-            await Task.Delay(0);
+            await LoadProducts();
             var product = allProducts.FirstOrDefault(x => x.ID == id);
             if (product == null)
             {
